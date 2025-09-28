@@ -39,9 +39,9 @@ A distributed flight booking system designed to handle ~10M Daily Active Users (
 - **Data Store**: PostgreSQL (primary)
 - **Consistency**: Strong (ACID transactions)
 
-#### 2. Search Service
-- **Responsibility**: Flight search with itinerary caching
-- **Data Stores**: PostgreSQL (itinerary cache) + Neo4j (fallback traversal)
+#### 2. Search Service (`com.flightbooking.search`)
+- **Responsibility**: Flight search with itinerary generation and caching
+- **Data Store**: Neo4j (primary for search)
 - **Performance**: 300-500ms response time
 
 #### 3. Event Processing
@@ -57,14 +57,13 @@ graph TB
     BookingService[Booking Service]
     SearchService[Search Service]
     PostgreSQL[(PostgreSQL<br/>Source of Truth)]
-    Neo4j[(Neo4j<br/>Graph & Cache)]
+    Neo4j[(Neo4j<br/>Search & Itineraries)]
     Redpanda[Redpanda<br/>Event Stream]
     
     Client --> BookingService
     Client --> SearchService
     
     BookingService --> PostgreSQL
-    SearchService --> PostgreSQL
     SearchService --> Neo4j
     
     PostgreSQL --> OutboxPublisher[Outbox Publisher]
@@ -85,10 +84,10 @@ graph TB
 - **Tickets**: Confirmed bookings
 - **Outbox Events**: Reliable event publishing queue
 
-### Neo4j (Search Optimization)
+### Neo4j (Search & Itineraries)
 - **Airports**: Airport metadata and connections
 - **Flight Instances**: Aggregated seat counts for search
-- **Itineraries**: Cached search results for performance
+- **Itineraries**: Cached search results for performance (primary search target)
 
 ### Redpanda (Event Streaming)
 - **Topic**: `booking.seat_events`
@@ -131,16 +130,19 @@ graph TB
 ## Search Strategy
 
 ### Primary Path (Fast)
-1. Query PostgreSQL itinerary cache by search parameters
-2. Return cached results sorted by price
+1. Query Neo4j Itinerary nodes by search parameters:
+   - Source airport, destination airport
+   - Departure date (composite key: "JFK_LAX_2024-01-15")
+   - Filter by minAvailableSeats >= passenger count (from request)
+2. Return cached results sorted by price (limit 100)
 
-### Fallback Path (Compute)
-1. Neo4j graph traversal for missing itineraries:
+### Fallback Path (Runtime Generation)
+1. If no cached itineraries found, generate on-the-fly:
    - Direct flights (0 stops)
-   - Single connection (1 stop)
-   - Double connection (2 stops)
-2. Persist computed itineraries to PostgreSQL cache
-3. Return results
+   - Single connection (1 stop, 45min-24hr layover)  
+   - Double connection (2 stops, 45min-24hr layover)
+2. Persist generated itineraries as new Itinerary nodes in Neo4j
+3. Return results to customer
 
 ## Monitoring & Observability
 
@@ -150,39 +152,25 @@ graph TB
 - `consumer_lag`: Graph sync consumer lag (per partition)
 - `booking_success_rate`: Successful booking percentage
 - `hold_expiry_rate`: Natural hold expiration rate
-- `reconciliation_drift_count`: Data consistency issues
 
 ### Alerting Strategy
 - Outbox lag > threshold: Immediate alert
 - Consumer lag > threshold: Immediate alert
 - Booking success rate < 95%: Alert
-- Reconciliation drift > 0: Daily report
 
 ## Scalability Considerations
 
 ### Horizontal Scaling
 - **Booking Service**: Stateless, scale with load
+- **Search Service**: Stateless, scale with load
 - **Outbox Publisher**: Multiple instances with FOR UPDATE SKIP LOCKED
 - **Graph Consumer**: Partition-based scaling
-- **Search Service**: Read replicas for Neo4j
+
 
 ### Performance Optimizations
 - **Connection Pooling**: Database connection optimization
-- **Caching**: Redis for session management
 - **Indexing**: Strategic indexes on search columns
-- **Partitioning**: Event streams partitioned by flight
 
-## Security & Compliance
-
-### Data Protection
-- **Encryption**: TLS for all communications
-- **PII Handling**: Secure user data storage
-- **Audit Trail**: Complete booking history tracking
-
-### Operational Security
-- **Rate Limiting**: Prevent booking abuse
-- **Session Management**: Secure hold management
-- **Input Validation**: Comprehensive request validation
 
 ## Deployment Architecture
 
@@ -206,15 +194,4 @@ graph TB
 - **Containerization**: Docker + Kubernetes
 - **CI/CD**: GitHub Actions / GitLab CI
 
-## Success Criteria
 
-### Performance Targets
-- **Search Latency**: 300-500ms (95th percentile)
-- **Booking Latency**: 500-1000ms (95th percentile)
-- **Availability**: 99.9% uptime
-- **Throughput**: 1000+ bookings/second
-
-### Data Consistency
-- **Strong Consistency**: 100% for booking operations
-- **Eventual Consistency**: <5 minute sync lag for search
-- **Reconciliation**: Zero drift tolerance

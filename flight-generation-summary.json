@@ -1,0 +1,14 @@
+{
+  "total_flights": 8820,
+  "airports_count": 98,
+  "date_range": "2025-10-01 to 2025-10-30",
+  "flights_per_airport_per_day": 3,
+  "destinations_per_airport": 5,
+  "total_seats": 441000,
+  "files_generated": [
+    "generated-flights-neo4j.cypher",
+    "generated-flights-sql.sql",
+    "generated-flight-relationships.cypher",
+    "generated-seats-sql.sql"
+  ]
+}

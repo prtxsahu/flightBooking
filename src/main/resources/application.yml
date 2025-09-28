@@ -1,0 +1,301 @@
+spring:
+  application:
+    name: flight-booking-system
+  
+  profiles:
+    active: dev
+  
+  # PostgreSQL Configuration (Source of Truth)
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookingdb
+    username: demo
+    password: demo_pass
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: FlightBookingHikariCP
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+      max-lifetime: 1200000
+      leak-detection-threshold: 60000
+  
+  # JPA Configuration
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 20
+  
+  # Neo4j Configuration (Search & Itineraries)
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: neo4j_pass
+    pool:
+      max-connection-lifetime: 30m
+      max-connection-pool-size: 50
+      connection-acquisition-timeout: 25s
+      idle-time-before-connection-test: 5m
+  
+  # Kafka/Redpanda Configuration
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      acks: all
+      retries: 3
+      batch-size: 16384
+      linger-ms: 5
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        enable.idempotence: true
+        max.in.flight.requests.per.connection: 5
+    consumer:
+      group-id: flight-booking-consumer
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      max-poll-records: 500
+      session-timeout-ms: 30000
+      heartbeat-interval-ms: 10000
+      properties:
+        isolation.level: read_committed
+  
+  # Jackson Configuration
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+      write-durations-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+    time-zone: UTC
+    default-property-inclusion: NON_NULL
+
+# Server Configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+    max-connections: 8192
+    accept-count: 100
+    connection-timeout: 20000ms
+
+# Management/Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,env,beans,configprops
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      percentiles:
+        http.server.requests: 0.5, 0.95, 0.99
+      slo:
+        http.server.requests: 50ms, 100ms, 200ms, 500ms, 1s, 2s, 5s
+    tags:
+      application: ${spring.application.name}
+      environment: ${spring.profiles.active}
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.flightbooking: DEBUG
+    org.springframework.kafka: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.neo4j: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/flight-booking.log
+    max-size: 10MB
+    max-history: 30
+
+# Flight Booking System Configuration
+flight-booking:
+  # Booking Configuration
+  booking:
+    hold-ttl-minutes: 15
+    max-passengers-per-booking: 9
+    max-bookings-per-request: 5
+  
+  # Search Configuration
+  search:
+    cache-ttl-minutes: 60
+    max-results: 50
+    max-connections: 2
+  
+  # Outbox Configuration
+  outbox:
+    poll-interval-ms: 1000
+    batch-size: 100
+    max-retries: 3
+    retry-delay-ms: 5000
+  
+  # Graph Sync Configuration
+  graph-sync:
+    consumer-group: graph-sync-consumer
+    batch-size: 100
+    commit-interval-ms: 10000
+    max-retries: 3
+  
+  # Reconciliation Configuration
+  reconciliation:
+    enabled: true
+    interval-minutes: 15
+    drift-threshold: 0
+
+# Monitoring Configuration
+monitoring:
+  metrics:
+    enabled: true
+    collection-interval-seconds: 30
+  alerts:
+    outbox-lag-threshold: 1000
+    consumer-lag-threshold: 5000
+    booking-success-rate-threshold: 95.0
+
+---
+# Development Profile
+spring:
+  config:
+    activate:
+      on-profile: dev
+  
+  # Development Database Settings
+  datasource:
+    hikari:
+      leak-detection-threshold: 60000
+  
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  
+  # Development Kafka Settings
+  kafka:
+    producer:
+      acks: 1
+      retries: 1
+    consumer:
+      enable-auto-commit: true
+      auto-offset-reset: latest
+
+# Development Logging
+logging:
+  level:
+    com.flightbooking: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.kafka: DEBUG
+
+---
+# Production Profile
+spring:
+  config:
+    activate:
+      on-profile: prod
+  
+  # Production Database Settings
+  datasource:
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 10
+      leak-detection-threshold: 0
+  
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  
+  # Production Kafka Settings
+  kafka:
+    producer:
+      acks: all
+      retries: 5
+      batch-size: 32768
+      linger-ms: 10
+    consumer:
+      enable-auto-commit: false
+      max-poll-records: 1000
+
+# Production Logging
+logging:
+  level:
+    root: WARN
+    com.flightbooking: INFO
+    org.springframework.kafka: WARN
+    org.hibernate.SQL: WARN
+  file:
+    max-size: 100MB
+    max-history: 7
+
+# Production Server Settings
+server:
+  tomcat:
+    threads:
+      max: 300
+      min-spare: 20
+    max-connections: 16384
+
+---
+# Test Profile
+spring:
+  config:
+    activate:
+      on-profile: test
+  
+  # Test Database Settings (In-Memory)
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  
+  # Test Kafka Settings
+  kafka:
+    bootstrap-servers: ${spring.embedded.kafka.brokers}
+    producer:
+      acks: 1
+    consumer:
+      group-id: test-consumer-group
+      auto-offset-reset: earliest
+
+# Test Logging
+logging:
+  level:
+    root: WARN
+    com.flightbooking: DEBUG

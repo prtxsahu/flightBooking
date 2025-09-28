@@ -1,0 +1,1133 @@
+2025-09-28 20:23:40 [FlightBookingHikariCP:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - FlightBookingHikariCP - Thread starvation or clock leap detected (housekeeper delta=17m54s87ms).
+2025-09-28 21:03:09 [FlightBookingHikariCP:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - FlightBookingHikariCP - Thread starvation or clock leap detected (housekeeper delta=38m58s365ms).
+2025-09-28 21:48:37 [FlightBookingHikariCP:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - FlightBookingHikariCP - Thread starvation or clock leap detected (housekeeper delta=45m28s220ms).
+2025-09-28 22:26:42 [FlightBookingHikariCP:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - FlightBookingHikariCP - Thread starvation or clock leap detected (housekeeper delta=2m4s469ms).
+2025-09-28 22:39:40 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/search/flights?source=MCO&destination=DTW&departureDate=2025-09-29&passengerCount=3", parameters={masked}
+2025-09-28 22:39:40 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.flightbooking.search.controller.SearchController#searchFlights(SearchRequest)
+2025-09-28 22:39:41 [http-nio-8080-exec-4] INFO  c.f.s.controller.SearchController - Received flight search request: MCO to DTW on 2025-09-29 for 3 passengers
+2025-09-28 22:39:41 [http-nio-8080-exec-4] INFO  c.f.s.service.FlightSearchService - Starting flight search: MCO to DTW on 2025-09-29 for 3 passengers
+2025-09-28 22:39:41 [http-nio-8080-exec-4] INFO  c.f.s.service.FlightSearchService - No cached itineraries found, generating new ones
+2025-09-28 22:39:41 [http-nio-8080-exec-4] INFO  c.f.search.service.ItineraryService - Generating itineraries using hybrid graph traversal: MCO to DTW on 2025-09-29
+2025-09-28 22:39:41 [http-nio-8080-exec-4] DEBUG c.f.search.service.ItineraryService - Creating itineraries: MCO to DTW on 2025-09-29 (max 2 stops)
+2025-09-28 22:39:41 [http-nio-8080-exec-4] DEBUG c.f.search.service.ItineraryService - Found 2 direct flights
+2025-09-28 22:39:42 [http-nio-8080-exec-4] WARN  o.s.d.n.c.Neo4jPersistenceExceptionTranslator - Don't know how to translate exception of type class java.lang.IllegalArgumentException
+2025-09-28 22:39:42 [http-nio-8080-exec-4] ERROR c.f.s.controller.SearchController - Error processing flight search request: Records with more than one value cannot be converted without a mapper
+org.springframework.dao.InvalidDataAccessApiUsageException: Records with more than one value cannot be converted without a mapper
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy2/jdk.proxy2.$Proxy184.findConnectingFlights(Unknown Source)
+	at com.flightbooking.search.service.ItineraryService.createItineraries(ItineraryService.java:106)
+	at com.flightbooking.search.service.ItineraryService.generateItineraries(ItineraryService.java:71)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.flightbooking.search.service.ItineraryService$$SpringCGLIB$$0.generateItineraries(<generated>)
+	at com.flightbooking.search.service.FlightSearchService.searchFlights(FlightSearchService.java:57)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.flightbooking.search.service.FlightSearchService$$SpringCGLIB$$0.searchFlights(<generated>)
+	at com.flightbooking.search.controller.SearchController.searchFlights(SearchController.java:54)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: java.lang.IllegalArgumentException: Records with more than one value cannot be converted without a mapper
+	at org.springframework.data.neo4j.core.SingleValueMappingFunction.apply(SingleValueMappingFunction.java:54)
+	at org.springframework.data.neo4j.core.SingleValueMappingFunction.apply(SingleValueMappingFunction.java:34)
+	at org.springframework.data.neo4j.core.DefaultNeo4jClient$DefaultRecordFetchSpec.lambda$partialMappingFunction$0(DefaultNeo4jClient.java:490)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+	at org.springframework.data.neo4j.core.DefaultNeo4jClient$DefaultRecordFetchSpec.all(DefaultNeo4jClient.java:475)
+	at java.base/java.util.Optional.map(Optional.java:260)
+	at org.springframework.data.neo4j.core.Neo4jTemplate$DefaultExecutableQuery.lambda$getResults$1(Neo4jTemplate.java:1263)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.springframework.data.neo4j.core.Neo4jTemplate$DefaultExecutableQuery.getResults(Neo4jTemplate.java:1262)
+	at org.springframework.data.neo4j.repository.query.Neo4jQueryExecution$DefaultQueryExecution.execute(Neo4jQueryExecution.java:51)
+	at org.springframework.data.neo4j.repository.query.AbstractNeo4jQuery.execute(AbstractNeo4jQuery.java:93)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:170)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 79 common frames omitted
+2025-09-28 22:39:42 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-28 22:39:42 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [SearchResponse(source=MCO, destination=DTW, departureDate=2025-09-29, passengerCount=3, totalResults (truncated)...]
+2025-09-28 22:39:42 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2025-09-28 22:47:29 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-28 22:47:29 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-28 22:47:29 [SpringApplicationShutdownHook] INFO  o.n.driver.internal.InternalDriver - Closing driver instance 564689266
+2025-09-28 22:47:29 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-28 22:47:29 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Shutdown initiated...
+2025-09-28 22:47:29 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Shutdown completed.
+2025-09-28 22:47:56 [main] INFO  com.flightbooking.DemoApplication - Starting DemoApplication v0.0.1-SNAPSHOT using Java 20.0.1 with PID 95517 (/Users/pratyakshsahu/Desktop/cursor/flightBooking/target/demo-0.0.1-SNAPSHOT.jar started by pratyakshsahu in /Users/pratyakshsahu/Desktop/cursor/flightBooking)
+2025-09-28 22:47:56 [main] DEBUG com.flightbooking.DemoApplication - Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-09-28 22:47:56 [main] INFO  com.flightbooking.DemoApplication - The following 1 profile is active: "dev"
+2025-09-28 22:47:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 22:47:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-28 22:47:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 208 ms. Found 6 JPA repository interfaces.
+2025-09-28 22:47:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 22:47:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Neo4j repositories in DEFAULT mode.
+2025-09-28 22:47:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 3 Neo4j repository interfaces.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.FlightInstanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.OutboxEventRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatHoldRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketSeatRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.search.repository.AirportRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.search.repository.FlightInstanceNodeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.search.repository.ItineraryRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 JDBC repository interfaces.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Neo4j repositories in DEFAULT mode.
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.FlightInstanceRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.OutboxEventRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatHoldRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketSeatRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 22:47:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 5 ms. Found 0 Neo4j repository interfaces.
+2025-09-28 22:47:57 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-09-28 22:47:57 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-28 22:47:57 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-09-28 22:47:57 [main] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2025-09-28 22:47:57 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1394 ms
+2025-09-28 22:47:57 [main] DEBUG o.s.w.f.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-09-28 22:47:57 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-28 22:47:57 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-09-28 22:47:57 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-28 22:47:57 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-28 22:47:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Starting...
+2025-09-28 22:47:58 [main] INFO  com.zaxxer.hikari.pool.HikariPool - FlightBookingHikariCP - Added connection org.postgresql.jdbc.PgConnection@3f033664
+2025-09-28 22:47:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Start completed.
+2025-09-28 22:47:58 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-28 22:47:58 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (FlightBookingHikariCP)']
+	Database driver: undefined/unknown
+	Database version: 15.14
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-28 22:47:58 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-28 22:47:58 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-28 22:47:59 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-28 22:48:00 [main] INFO  o.n.driver.internal.DriverFactory - Direct driver instance 1700669704 created for server address localhost:7687
+2025-09-28 22:48:00 [main] WARN  o.s.d.n.c.m.Neo4jPersistentEntity - The entity com.flightbooking.search.entity.relationship.DepartsWith is using a Long value for storing internally generated Neo4j ids. The Neo4j internal Long Ids are deprecated, please consider using an external ID generator.
+2025-09-28 22:48:00 [main] WARN  o.s.d.n.c.m.Neo4jPersistentEntity - The entity com.flightbooking.search.entity.relationship.ArrivesAt is using a Long value for storing internally generated Neo4j ids. The Neo4j internal Long Ids are deprecated, please consider using an external ID generator.
+2025-09-28 22:48:00 [main] WARN  o.s.d.n.c.m.Neo4jPersistentEntity - The entity com.flightbooking.search.entity.relationship.IncludesLeg is using a Long value for storing internally generated Neo4j ids. The Neo4j internal Long Ids are deprecated, please consider using an external ID generator.
+2025-09-28 22:48:00 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-28 22:48:00 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 10 mappings in 'requestMappingHandlerMapping'
+2025-09-28 22:48:00 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-09-28 22:48:00 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-09-28 22:48:00 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-09-28 22:48:00 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 7 endpoints beneath base path '/actuator'
+2025-09-28 22:48:00 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api'
+2025-09-28 22:48:00 [main] INFO  com.flightbooking.DemoApplication - Started DemoApplication in 5.029 seconds (process running for 5.429)
+2025-09-28 22:48:19 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-28 22:48:19 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-28 22:48:19 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2025-09-28 22:48:19 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2025-09-28 22:48:19 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2025-09-28 22:48:19 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@925e0c8
+2025-09-28 22:48:19 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@4b9f2522
+2025-09-28 22:48:19 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-09-28 22:48:19 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+2025-09-28 22:48:19 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/search/flights?source=MCO&destination=DTW&departureDate=2025-09-29&passengerCount=3", parameters={masked}
+2025-09-28 22:48:19 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.flightbooking.search.controller.SearchController#searchFlights(SearchRequest)
+2025-09-28 22:48:19 [http-nio-8080-exec-2] INFO  c.f.s.controller.SearchController - Received flight search request: MCO to DTW on 2025-09-29 for 3 passengers
+2025-09-28 22:48:19 [http-nio-8080-exec-2] INFO  c.f.s.service.FlightSearchService - Starting flight search: MCO to DTW on 2025-09-29 for 3 passengers
+2025-09-28 22:48:19 [http-nio-8080-exec-2] INFO  c.f.s.service.FlightSearchService - No cached itineraries found, generating new ones
+2025-09-28 22:48:19 [http-nio-8080-exec-2] INFO  c.f.search.service.ItineraryService - Generating itineraries using hybrid graph traversal: MCO to DTW on 2025-09-29
+2025-09-28 22:48:19 [http-nio-8080-exec-2] DEBUG c.f.search.service.ItineraryService - Creating itineraries: MCO to DTW on 2025-09-29 (max 2 stops)
+2025-09-28 22:48:19 [http-nio-8080-exec-2] DEBUG c.f.search.service.ItineraryService - Found 2 direct flights
+2025-09-28 22:48:20 [http-nio-8080-exec-2] WARN  o.s.d.n.c.Neo4jPersistenceExceptionTranslator - Don't know how to translate exception of type class java.lang.IllegalArgumentException
+2025-09-28 22:48:20 [http-nio-8080-exec-2] ERROR c.f.s.controller.SearchController - Error processing flight search request: Records with more than one value cannot be converted without a mapper
+org.springframework.dao.InvalidDataAccessApiUsageException: Records with more than one value cannot be converted without a mapper
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy2/jdk.proxy2.$Proxy185.findConnectingFlights(Unknown Source)
+	at com.flightbooking.search.service.ItineraryService.createItineraries(ItineraryService.java:106)
+	at com.flightbooking.search.service.ItineraryService.generateItineraries(ItineraryService.java:71)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.flightbooking.search.service.ItineraryService$$SpringCGLIB$$0.generateItineraries(<generated>)
+	at com.flightbooking.search.service.FlightSearchService.searchFlights(FlightSearchService.java:57)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.flightbooking.search.service.FlightSearchService$$SpringCGLIB$$0.searchFlights(<generated>)
+	at com.flightbooking.search.controller.SearchController.searchFlights(SearchController.java:54)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: java.lang.IllegalArgumentException: Records with more than one value cannot be converted without a mapper
+	at org.springframework.data.neo4j.core.SingleValueMappingFunction.apply(SingleValueMappingFunction.java:54)
+	at org.springframework.data.neo4j.core.SingleValueMappingFunction.apply(SingleValueMappingFunction.java:34)
+	at org.springframework.data.neo4j.core.DefaultNeo4jClient$DefaultRecordFetchSpec.lambda$partialMappingFunction$0(DefaultNeo4jClient.java:490)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+	at org.springframework.data.neo4j.core.DefaultNeo4jClient$DefaultRecordFetchSpec.all(DefaultNeo4jClient.java:475)
+	at java.base/java.util.Optional.map(Optional.java:260)
+	at org.springframework.data.neo4j.core.Neo4jTemplate$DefaultExecutableQuery.lambda$getResults$1(Neo4jTemplate.java:1263)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.springframework.data.neo4j.core.Neo4jTemplate$DefaultExecutableQuery.getResults(Neo4jTemplate.java:1262)
+	at org.springframework.data.neo4j.repository.query.Neo4jQueryExecution$DefaultQueryExecution.execute(Neo4jQueryExecution.java:51)
+	at org.springframework.data.neo4j.repository.query.AbstractNeo4jQuery.execute(AbstractNeo4jQuery.java:93)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:170)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 79 common frames omitted
+2025-09-28 22:48:20 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-28 22:48:20 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [SearchResponse(source=MCO, destination=DTW, departureDate=2025-09-29, passengerCount=3, totalResults (truncated)...]
+2025-09-28 22:48:20 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2025-09-28 23:05:54 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-28 23:05:54 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-28 23:05:54 [SpringApplicationShutdownHook] INFO  o.n.driver.internal.InternalDriver - Closing driver instance 1700669704
+2025-09-28 23:05:55 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-28 23:05:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Shutdown initiated...
+2025-09-28 23:05:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Shutdown completed.
+2025-09-28 23:06:36 [main] INFO  com.flightbooking.DemoApplication - Starting DemoApplication v0.0.1-SNAPSHOT using Java 20.0.1 with PID 96823 (/Users/pratyakshsahu/Desktop/cursor/flightBooking/target/demo-0.0.1-SNAPSHOT.jar started by pratyakshsahu in /Users/pratyakshsahu/Desktop/cursor/flightBooking)
+2025-09-28 23:06:36 [main] DEBUG com.flightbooking.DemoApplication - Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-09-28 23:06:36 [main] INFO  com.flightbooking.DemoApplication - The following 1 profile is active: "dev"
+2025-09-28 23:06:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 23:06:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 82 ms. Found 6 JPA repository interfaces.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Neo4j repositories in DEFAULT mode.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 3 Neo4j repository interfaces.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.FlightInstanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.OutboxEventRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatHoldRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketSeatRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.search.repository.AirportRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.search.repository.FlightInstanceNodeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.search.repository.ItineraryRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 11 ms. Found 0 JDBC repository interfaces.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Neo4j repositories in DEFAULT mode.
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.FlightInstanceRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.OutboxEventRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatHoldRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketSeatRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:06:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 3 ms. Found 0 Neo4j repository interfaces.
+2025-09-28 23:06:37 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-09-28 23:06:37 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-28 23:06:37 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-09-28 23:06:37 [main] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2025-09-28 23:06:37 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1140 ms
+2025-09-28 23:06:37 [main] DEBUG o.s.w.f.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-09-28 23:06:37 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-28 23:06:37 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-09-28 23:06:37 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-28 23:06:38 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-28 23:06:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Starting...
+2025-09-28 23:06:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - FlightBookingHikariCP - Added connection org.postgresql.jdbc.PgConnection@2dd08ff1
+2025-09-28 23:06:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Start completed.
+2025-09-28 23:06:38 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-28 23:06:38 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (FlightBookingHikariCP)']
+	Database driver: undefined/unknown
+	Database version: 15.14
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-28 23:06:38 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-28 23:06:39 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-28 23:06:39 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-28 23:06:40 [main] INFO  o.n.driver.internal.DriverFactory - Direct driver instance 1415443141 created for server address localhost:7687
+2025-09-28 23:06:40 [main] WARN  o.s.d.n.c.m.Neo4jPersistentEntity - The entity com.flightbooking.search.entity.relationship.DepartsWith is using a Long value for storing internally generated Neo4j ids. The Neo4j internal Long Ids are deprecated, please consider using an external ID generator.
+2025-09-28 23:06:40 [main] WARN  o.s.d.n.c.m.Neo4jPersistentEntity - The entity com.flightbooking.search.entity.relationship.ArrivesAt is using a Long value for storing internally generated Neo4j ids. The Neo4j internal Long Ids are deprecated, please consider using an external ID generator.
+2025-09-28 23:06:40 [main] WARN  o.s.d.n.c.m.Neo4jPersistentEntity - The entity com.flightbooking.search.entity.relationship.IncludesLeg is using a Long value for storing internally generated Neo4j ids. The Neo4j internal Long Ids are deprecated, please consider using an external ID generator.
+2025-09-28 23:06:40 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-28 23:06:40 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 10 mappings in 'requestMappingHandlerMapping'
+2025-09-28 23:06:40 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-09-28 23:06:40 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-09-28 23:06:40 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-09-28 23:06:40 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 7 endpoints beneath base path '/actuator'
+2025-09-28 23:06:41 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api'
+2025-09-28 23:06:41 [main] INFO  com.flightbooking.DemoApplication - Started DemoApplication in 4.853 seconds (process running for 5.247)
+2025-09-28 23:06:46 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-28 23:06:46 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-28 23:06:46 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2025-09-28 23:06:46 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2025-09-28 23:06:46 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2025-09-28 23:06:46 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@1d064935
+2025-09-28 23:06:46 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@73f81ad7
+2025-09-28 23:06:46 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-09-28 23:06:46 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2025-09-28 23:06:46 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/search/flights?source=JFK&destination=RIC&departureDate=2025-10-01&passengerCount=3", parameters={masked}
+2025-09-28 23:06:46 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.flightbooking.search.controller.SearchController#searchFlights(SearchRequest)
+2025-09-28 23:06:47 [http-nio-8080-exec-1] INFO  c.f.s.controller.SearchController - Received flight search request: JFK to RIC on 2025-10-01 for 3 passengers
+2025-09-28 23:06:48 [http-nio-8080-exec-1] INFO  c.f.s.service.FlightSearchService - Starting flight search: JFK to RIC on 2025-10-01 for 3 passengers
+2025-09-28 23:06:48 [http-nio-8080-exec-1] INFO  c.f.s.service.FlightSearchService - No cached itineraries found, generating new ones
+2025-09-28 23:06:48 [http-nio-8080-exec-1] INFO  c.f.search.service.ItineraryService - Generating itineraries using hybrid graph traversal: JFK to RIC on 2025-10-01
+2025-09-28 23:06:48 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Creating itineraries: JFK to RIC on 2025-10-01 (max 2 stops)
+2025-09-28 23:06:48 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Found 1 direct flights
+2025-09-28 23:06:48 [http-nio-8080-exec-1] WARN  o.s.d.n.c.Neo4jPersistenceExceptionTranslator - Don't know how to translate exception of type class java.lang.IllegalArgumentException
+2025-09-28 23:06:48 [http-nio-8080-exec-1] ERROR c.f.s.controller.SearchController - Error processing flight search request: Records with more than one value cannot be converted without a mapper
+org.springframework.dao.InvalidDataAccessApiUsageException: Records with more than one value cannot be converted without a mapper
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy2/jdk.proxy2.$Proxy185.findConnectingFlights(Unknown Source)
+	at com.flightbooking.search.service.ItineraryService.createItineraries(ItineraryService.java:110)
+	at com.flightbooking.search.service.ItineraryService.generateItineraries(ItineraryService.java:71)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.flightbooking.search.service.ItineraryService$$SpringCGLIB$$0.generateItineraries(<generated>)
+	at com.flightbooking.search.service.FlightSearchService.searchFlights(FlightSearchService.java:57)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.flightbooking.search.service.FlightSearchService$$SpringCGLIB$$0.searchFlights(<generated>)
+	at com.flightbooking.search.controller.SearchController.searchFlights(SearchController.java:54)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: java.lang.IllegalArgumentException: Records with more than one value cannot be converted without a mapper
+	at org.springframework.data.neo4j.core.SingleValueMappingFunction.apply(SingleValueMappingFunction.java:54)
+	at org.springframework.data.neo4j.core.SingleValueMappingFunction.apply(SingleValueMappingFunction.java:34)
+	at org.springframework.data.neo4j.core.DefaultNeo4jClient$DefaultRecordFetchSpec.lambda$partialMappingFunction$0(DefaultNeo4jClient.java:490)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+	at org.springframework.data.neo4j.core.DefaultNeo4jClient$DefaultRecordFetchSpec.all(DefaultNeo4jClient.java:475)
+	at java.base/java.util.Optional.map(Optional.java:260)
+	at org.springframework.data.neo4j.core.Neo4jTemplate$DefaultExecutableQuery.lambda$getResults$1(Neo4jTemplate.java:1263)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.springframework.data.neo4j.core.Neo4jTemplate$DefaultExecutableQuery.getResults(Neo4jTemplate.java:1262)
+	at org.springframework.data.neo4j.repository.query.Neo4jQueryExecution$DefaultQueryExecution.execute(Neo4jQueryExecution.java:51)
+	at org.springframework.data.neo4j.repository.query.AbstractNeo4jQuery.execute(AbstractNeo4jQuery.java:93)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:170)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 79 common frames omitted
+2025-09-28 23:06:48 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-28 23:06:48 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [SearchResponse(source=JFK, destination=RIC, departureDate=2025-10-01, passengerCount=3, totalResults (truncated)...]
+2025-09-28 23:06:48 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2025-09-28 23:09:25 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-28 23:09:25 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-28 23:09:25 [SpringApplicationShutdownHook] INFO  o.n.driver.internal.InternalDriver - Closing driver instance 1415443141
+2025-09-28 23:09:25 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-28 23:09:25 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Shutdown initiated...
+2025-09-28 23:09:25 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Shutdown completed.
+2025-09-28 23:09:36 [main] INFO  com.flightbooking.DemoApplication - Starting DemoApplication v0.0.1-SNAPSHOT using Java 20.0.1 with PID 97371 (/Users/pratyakshsahu/Desktop/cursor/flightBooking/target/demo-0.0.1-SNAPSHOT.jar started by pratyakshsahu in /Users/pratyakshsahu/Desktop/cursor/flightBooking)
+2025-09-28 23:09:36 [main] DEBUG com.flightbooking.DemoApplication - Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-09-28 23:09:36 [main] INFO  com.flightbooking.DemoApplication - The following 1 profile is active: "dev"
+2025-09-28 23:09:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 23:09:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 80 ms. Found 6 JPA repository interfaces.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Neo4j repositories in DEFAULT mode.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 3 Neo4j repository interfaces.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.FlightInstanceRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.OutboxEventRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatHoldRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketSeatRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.search.repository.AirportRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.search.repository.FlightInstanceNodeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.flightbooking.search.repository.ItineraryRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 JDBC repository interfaces.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Neo4j repositories in DEFAULT mode.
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.FlightInstanceRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.OutboxEventRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatHoldRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.SeatRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.flightbooking.booking.repository.TicketSeatRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+2025-09-28 23:09:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 2 ms. Found 0 Neo4j repository interfaces.
+2025-09-28 23:09:37 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-09-28 23:09:37 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-28 23:09:37 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-09-28 23:09:37 [main] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2025-09-28 23:09:37 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1037 ms
+2025-09-28 23:09:37 [main] DEBUG o.s.w.f.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-09-28 23:09:37 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-28 23:09:37 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-09-28 23:09:37 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-28 23:09:37 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-28 23:09:37 [main] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Starting...
+2025-09-28 23:09:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - FlightBookingHikariCP - Added connection org.postgresql.jdbc.PgConnection@59b1edab
+2025-09-28 23:09:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Start completed.
+2025-09-28 23:09:38 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-28 23:09:38 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (FlightBookingHikariCP)']
+	Database driver: undefined/unknown
+	Database version: 15.14
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-28 23:09:38 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-28 23:09:39 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-28 23:09:39 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-28 23:09:40 [main] INFO  o.n.driver.internal.DriverFactory - Direct driver instance 312122760 created for server address localhost:7687
+2025-09-28 23:09:40 [main] WARN  o.s.d.n.c.m.Neo4jPersistentEntity - The entity com.flightbooking.search.entity.relationship.DepartsWith is using a Long value for storing internally generated Neo4j ids. The Neo4j internal Long Ids are deprecated, please consider using an external ID generator.
+2025-09-28 23:09:40 [main] WARN  o.s.d.n.c.m.Neo4jPersistentEntity - The entity com.flightbooking.search.entity.relationship.ArrivesAt is using a Long value for storing internally generated Neo4j ids. The Neo4j internal Long Ids are deprecated, please consider using an external ID generator.
+2025-09-28 23:09:40 [main] WARN  o.s.d.n.c.m.Neo4jPersistentEntity - The entity com.flightbooking.search.entity.relationship.IncludesLeg is using a Long value for storing internally generated Neo4j ids. The Neo4j internal Long Ids are deprecated, please consider using an external ID generator.
+2025-09-28 23:09:40 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-28 23:09:40 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 10 mappings in 'requestMappingHandlerMapping'
+2025-09-28 23:09:40 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-09-28 23:09:40 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-09-28 23:09:40 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-09-28 23:09:41 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 7 endpoints beneath base path '/actuator'
+2025-09-28 23:09:41 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api'
+2025-09-28 23:09:41 [main] INFO  com.flightbooking.DemoApplication - Started DemoApplication in 4.98 seconds (process running for 5.263)
+2025-09-28 23:09:52 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-28 23:09:52 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-28 23:09:52 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2025-09-28 23:09:52 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2025-09-28 23:09:52 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2025-09-28 23:09:52 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@3d18ae81
+2025-09-28 23:09:52 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@36f2bb92
+2025-09-28 23:09:52 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-09-28 23:09:52 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 11 ms
+2025-09-28 23:09:52 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/search/flights?source=JFK&destination=RIC&departureDate=2025-10-01&passengerCount=3", parameters={masked}
+2025-09-28 23:09:52 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.flightbooking.search.controller.SearchController#searchFlights(SearchRequest)
+2025-09-28 23:09:52 [http-nio-8080-exec-1] INFO  c.f.s.controller.SearchController - Received flight search request: JFK to RIC on 2025-10-01 for 3 passengers
+2025-09-28 23:09:52 [http-nio-8080-exec-1] INFO  c.f.s.service.FlightSearchService - Starting flight search: JFK to RIC on 2025-10-01 for 3 passengers
+2025-09-28 23:09:52 [http-nio-8080-exec-1] INFO  c.f.s.service.FlightSearchService - No cached itineraries found, generating new ones
+2025-09-28 23:09:52 [http-nio-8080-exec-1] INFO  c.f.search.service.ItineraryService - Generating itineraries using hybrid graph traversal: JFK to RIC on 2025-10-01
+2025-09-28 23:09:52 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Creating itineraries: JFK to RIC on 2025-10-01 (max 2 stops)
+2025-09-28 23:09:52 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Found 1 direct flights
+2025-09-28 23:09:53 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Found 1 connecting flights (1 stop)
+2025-09-28 23:09:54 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Found 0 connecting flights (2 stops)
+2025-09-28 23:09:54 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Found 2 total paths from Neo4j graph traversal
+2025-09-28 23:09:54 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Processing path with 1 flights, length: 1
+2025-09-28 23:09:54 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Flight seats debug - Flight IDs: [7351], Available seats: [50]
+2025-09-28 23:09:54 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Generated flightLegsHash: a18ad9f9bcd4e260979d102a260fc262
+2025-09-28 23:09:54 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Processing path with 2 flights, length: 2
+2025-09-28 23:09:54 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Flight seats debug - Flight IDs: [1, 249], Available seats: [50, 50]
+2025-09-28 23:09:54 [http-nio-8080-exec-1] DEBUG c.f.search.service.ItineraryService - Generated flightLegsHash: 7eff94efbdec182a0a0df49595bc9c44
+2025-09-28 23:09:54 [http-nio-8080-exec-1] INFO  c.f.search.service.ItineraryService - Saving 2 generated itineraries to cache
+2025-09-28 23:09:54 [http-nio-8080-exec-1] WARN  o.s.d.n.c.m.DefaultNeo4jIsNewStrategy - Instances of class com.flightbooking.search.entity.Itinerary with an assigned id will always be treated as new without version property
+2025-09-28 23:09:54 [http-nio-8080-exec-1] WARN  o.s.data.neo4j.cypher.deprecation - Neo.ClientNotification.Statement.FeatureDeprecationWarning: This feature is deprecated and will be removed in future versions.
+	UNWIND $__entities__ AS entity MERGE (itinerary:`Itinerary` {id: entity.__id__}) SET itinerary += entity.__properties__ RETURN id(itinerary) AS __elementId__, itinerary.id AS __id__
+	                                                                                                                               ^
+The query used a deprecated function: `id`.
+2025-09-28 23:09:54 [http-nio-8080-exec-1] INFO  c.f.search.service.ItineraryService - Successfully saved 2 unique itineraries
+2025-09-28 23:09:54 [http-nio-8080-exec-1] INFO  c.f.search.service.ItineraryService - Generated 2 itineraries using hybrid approach
+2025-09-28 23:09:54 [http-nio-8080-exec-1] INFO  c.f.s.controller.SearchController - Search completed successfully. Found 2 flight options
+2025-09-28 23:09:54 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-28 23:09:54 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [SearchResponse(source=JFK, destination=RIC, departureDate=2025-10-01, passengerCount=3, totalResults (truncated)...]
+2025-09-28 23:09:54 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-09-28 23:10:28 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - POST "/api/v1/booking/initiate", parameters={}
+2025-09-28 23:10:28 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.flightbooking.booking.controller.BookingController#initiateBooking(BookingRequest)
+2025-09-28 23:10:28 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [BookingRequest(flightIds=[1, 249], seatCount=3)]
+2025-09-28 23:10:28 [http-nio-8080-exec-4] INFO  c.f.b.controller.BookingController - Received booking initiation request: 2 flights for 3 passengers
+2025-09-28 23:10:28 [http-nio-8080-exec-4] INFO  c.f.booking.service.BookingService - Initiating booking for 2 flights with 3 seats for session sess_1759081228829_c6387963
+2025-09-28 23:10:28 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        fi1_0.id,
+        fi1_0.arrival_time,
+        fi1_0.created_at,
+        fi1_0.departure_time,
+        fi1_0.destination,
+        fi1_0.flight_no,
+        fi1_0.price_money,
+        fi1_0.source,
+        fi1_0.updated_at 
+    from
+        flight_instance fi1_0 
+    where
+        fi1_0.id=?
+2025-09-28 23:10:28 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        fi1_0.id,
+        fi1_0.arrival_time,
+        fi1_0.created_at,
+        fi1_0.departure_time,
+        fi1_0.destination,
+        fi1_0.flight_no,
+        fi1_0.price_money,
+        fi1_0.source,
+        fi1_0.updated_at 
+    from
+        flight_instance fi1_0 
+    where
+        fi1_0.id=?
+2025-09-28 23:10:28 [http-nio-8080-exec-4] DEBUG c.f.booking.service.BookingService - Creating seat holds for flight 1 (leg 1/2)
+2025-09-28 23:10:28 [http-nio-8080-exec-4] INFO  c.f.booking.service.SeatHoldService - Creating 3 seat holds for flight 1 with session sess_1759081228829_c6387963
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    SELECT
+        s.* 
+    FROM
+        seat s 
+    WHERE
+        s.flight_instance_id = ? 
+        AND s.is_available = true 
+        AND NOT EXISTS (SELECT
+            1 
+        FROM
+            seat_hold h 
+        WHERE
+            h.seat_id = s.id 
+            AND h.expires_at > NOW()) 
+        AND NOT EXISTS (SELECT
+            1 
+        FROM
+            ticket_seat ts 
+        WHERE
+            ts.seat_id = s.id) 
+    ORDER BY
+        s.seat_no 
+    LIMIT
+        ? FOR UPDATE SKIP LOCKED
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        seat_hold
+        (created_at, expires_at, flight_instance_id, holder_session_id, seat_id, version) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        seat_hold
+        (created_at, expires_at, flight_instance_id, holder_session_id, seat_id, version) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        seat_hold
+        (created_at, expires_at, flight_instance_id, holder_session_id, seat_id, version) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-09-28 23:10:29 [http-nio-8080-exec-4] INFO  c.f.booking.service.SeatHoldService - Successfully created 3 seat holds for session sess_1759081228829_c6387963 on flight 1
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG c.f.booking.service.BookingService - Successfully created 3 seat holds for flight 1
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG c.f.booking.service.BookingService - Creating seat holds for flight 249 (leg 2/2)
+2025-09-28 23:10:29 [http-nio-8080-exec-4] INFO  c.f.booking.service.SeatHoldService - Creating 3 seat holds for flight 249 with session sess_1759081228829_c6387963
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    SELECT
+        s.* 
+    FROM
+        seat s 
+    WHERE
+        s.flight_instance_id = ? 
+        AND s.is_available = true 
+        AND NOT EXISTS (SELECT
+            1 
+        FROM
+            seat_hold h 
+        WHERE
+            h.seat_id = s.id 
+            AND h.expires_at > NOW()) 
+        AND NOT EXISTS (SELECT
+            1 
+        FROM
+            ticket_seat ts 
+        WHERE
+            ts.seat_id = s.id) 
+    ORDER BY
+        s.seat_no 
+    LIMIT
+        ? FOR UPDATE SKIP LOCKED
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        seat_hold
+        (created_at, expires_at, flight_instance_id, holder_session_id, seat_id, version) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        seat_hold
+        (created_at, expires_at, flight_instance_id, holder_session_id, seat_id, version) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        seat_hold
+        (created_at, expires_at, flight_instance_id, holder_session_id, seat_id, version) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-09-28 23:10:29 [http-nio-8080-exec-4] INFO  c.f.booking.service.SeatHoldService - Successfully created 3 seat holds for session sess_1759081228829_c6387963 on flight 249
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG c.f.booking.service.BookingService - Successfully created 3 seat holds for flight 249
+2025-09-28 23:10:29 [http-nio-8080-exec-4] INFO  c.f.booking.service.TicketService - Creating 1 ticket with IN_PROGRESS status for payment ID pay_04dfb8865c8e4f88 across 2 flights for session sess_1759081228829_c6387963
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        ticket
+        (created_at, flight_instance_id, holder_user_id, payment_id, session_id, status, total_amount, version) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-09-28 23:10:29 [http-nio-8080-exec-4] INFO  c.f.booking.service.TicketService - Successfully created ticket 1 with IN_PROGRESS status for session sess_1759081228829_c6387963
+2025-09-28 23:10:29 [http-nio-8080-exec-4] INFO  c.f.booking.service.BookingService - Successfully initiated booking for 2 flights with 6 seat holds, ticket 1 and payment ID pay_04dfb8865c8e4f88
+2025-09-28 23:10:29 [http-nio-8080-exec-4] INFO  c.f.b.controller.BookingController - Booking initiated successfully for session: sess_1759081228829_c6387963. payment ID: pay_04dfb8865c8e4f88
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [BookingResponse(status=success, message=Seats successfully held, paymentId=pay_04dfb8865c8e4f88, fli (truncated)...]
+2025-09-28 23:10:29 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-09-28 23:10:47 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - POST "/api/v1/payment/process", parameters={}
+2025-09-28 23:10:47 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.flightbooking.booking.controller.PaymentController#processPayment(PaymentRequest)
+2025-09-28 23:10:47 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [PaymentRequest(paymentId=pay_04dfb8865c8e4f88, paymentStatus=SUCCESS, paymentMethod=null, paymentPro (truncated)...]
+2025-09-28 23:10:48 [http-nio-8080-exec-6] INFO  c.f.b.controller.PaymentController - Received payment processing request: payment ID pay_04dfb8865c8e4f88, status SUCCESS, session {}
+2025-09-28 23:10:48 [http-nio-8080-exec-6] INFO  c.f.booking.service.BookingService - Processing payment pay_04dfb8865c8e4f88 with status SUCCESS for session {}
+2025-09-28 23:10:48 [http-nio-8080-exec-6] INFO  c.f.booking.service.BookingService - Processing successful payment pay_04dfb8865c8e4f88
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.id,
+        t1_0.created_at,
+        t1_0.flight_instance_id,
+        t1_0.holder_user_id,
+        t1_0.payment_id,
+        t1_0.session_id,
+        t1_0.status,
+        t1_0.total_amount,
+        t1_0.version 
+    from
+        ticket t1_0 
+    where
+        t1_0.payment_id=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        sh1_0.id,
+        sh1_0.created_at,
+        sh1_0.expires_at,
+        sh1_0.flight_instance_id,
+        sh1_0.holder_session_id,
+        sh1_0.seat_id,
+        sh1_0.version 
+    from
+        seat_hold sh1_0 
+    where
+        sh1_0.holder_session_id=? 
+        and sh1_0.expires_at>?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] INFO  c.f.booking.service.TicketService - Confirming ticket 1 and creating 6 seat relationships
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        ticket_seat
+        (seat_id, ticket_id) 
+    values
+        (?, ?)
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        ticket_seat
+        (seat_id, ticket_id) 
+    values
+        (?, ?)
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        ticket_seat
+        (seat_id, ticket_id) 
+    values
+        (?, ?)
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        ticket_seat
+        (seat_id, ticket_id) 
+    values
+        (?, ?)
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        ticket_seat
+        (seat_id, ticket_id) 
+    values
+        (?, ?)
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        ticket_seat
+        (seat_id, ticket_id) 
+    values
+        (?, ?)
+2025-09-28 23:10:48 [http-nio-8080-exec-6] INFO  c.f.booking.service.TicketService - Successfully confirmed ticket 1 with 6 seat relationships
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    update
+        ticket 
+    set
+        flight_instance_id=?,
+        holder_user_id=?,
+        payment_id=?,
+        session_id=?,
+        status=?,
+        total_amount=?,
+        version=? 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] INFO  c.f.booking.service.SeatHoldService - Confirming seat holds for session sess_1759081228829_c6387963
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        sh1_0.id,
+        sh1_0.created_at,
+        sh1_0.expires_at,
+        sh1_0.flight_instance_id,
+        sh1_0.holder_session_id,
+        sh1_0.seat_id,
+        sh1_0.version 
+    from
+        seat_hold sh1_0 
+    where
+        sh1_0.holder_session_id=? 
+        and sh1_0.expires_at>?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        s1_0.id,
+        s1_0.cabin_class,
+        s1_0.flight_instance_id,
+        s1_0.is_available,
+        s1_0.seat_no,
+        s1_0.version 
+    from
+        seat s1_0 
+    where
+        s1_0.id=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        s1_0.id,
+        s1_0.cabin_class,
+        s1_0.flight_instance_id,
+        s1_0.is_available,
+        s1_0.seat_no,
+        s1_0.version 
+    from
+        seat s1_0 
+    where
+        s1_0.id=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        s1_0.id,
+        s1_0.cabin_class,
+        s1_0.flight_instance_id,
+        s1_0.is_available,
+        s1_0.seat_no,
+        s1_0.version 
+    from
+        seat s1_0 
+    where
+        s1_0.id=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        s1_0.id,
+        s1_0.cabin_class,
+        s1_0.flight_instance_id,
+        s1_0.is_available,
+        s1_0.seat_no,
+        s1_0.version 
+    from
+        seat s1_0 
+    where
+        s1_0.id=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        s1_0.id,
+        s1_0.cabin_class,
+        s1_0.flight_instance_id,
+        s1_0.is_available,
+        s1_0.seat_no,
+        s1_0.version 
+    from
+        seat s1_0 
+    where
+        s1_0.id=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        s1_0.id,
+        s1_0.cabin_class,
+        s1_0.flight_instance_id,
+        s1_0.is_available,
+        s1_0.seat_no,
+        s1_0.version 
+    from
+        seat s1_0 
+    where
+        s1_0.id=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] INFO  c.f.booking.service.SeatHoldService - Successfully confirmed 6 seat holds for session sess_1759081228829_c6387963
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    update
+        seat 
+    set
+        cabin_class=?,
+        flight_instance_id=?,
+        is_available=?,
+        seat_no=?,
+        version=? 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    update
+        seat 
+    set
+        cabin_class=?,
+        flight_instance_id=?,
+        is_available=?,
+        seat_no=?,
+        version=? 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    update
+        seat 
+    set
+        cabin_class=?,
+        flight_instance_id=?,
+        is_available=?,
+        seat_no=?,
+        version=? 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    update
+        seat 
+    set
+        cabin_class=?,
+        flight_instance_id=?,
+        is_available=?,
+        seat_no=?,
+        version=? 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    update
+        seat 
+    set
+        cabin_class=?,
+        flight_instance_id=?,
+        is_available=?,
+        seat_no=?,
+        version=? 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    update
+        seat 
+    set
+        cabin_class=?,
+        flight_instance_id=?,
+        is_available=?,
+        seat_no=?,
+        version=? 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        seat_hold 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        seat_hold 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        seat_hold 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        seat_hold 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        seat_hold 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        seat_hold 
+    where
+        id=? 
+        and version=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] INFO  c.f.booking.service.BookingService - Successfully confirmed payment pay_04dfb8865c8e4f88 for session sess_1759081228829_c6387963 with ticket 1 and 6 seats
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        fi1_0.id,
+        fi1_0.arrival_time,
+        fi1_0.created_at,
+        fi1_0.departure_time,
+        fi1_0.destination,
+        fi1_0.flight_no,
+        fi1_0.price_money,
+        fi1_0.source,
+        fi1_0.updated_at 
+    from
+        flight_instance fi1_0 
+    where
+        fi1_0.id=?
+2025-09-28 23:10:48 [http-nio-8080-exec-6] INFO  c.f.b.controller.PaymentController - Payment processed successfully: payment ID pay_04dfb8865c8e4f88, ticket ID 1
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [PaymentResponse(status=success, message=Booking confirmed successfully, paymentId=pay_04dfb8865c8e4f (truncated)...]
+2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
