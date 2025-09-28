@@ -1131,3 +1131,9 @@ The query used a deprecated function: `id`.
 2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
 2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [PaymentResponse(status=success, message=Booking confirmed successfully, paymentId=pay_04dfb8865c8e4f (truncated)...]
 2025-09-28 23:10:48 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-09-28 23:34:38 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-28 23:34:38 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-28 23:34:38 [SpringApplicationShutdownHook] INFO  o.n.driver.internal.InternalDriver - Closing driver instance 312122760
+2025-09-28 23:34:39 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-28 23:34:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Shutdown initiated...
+2025-09-28 23:34:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - FlightBookingHikariCP - Shutdown completed.

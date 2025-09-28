@@ -1,0 +1,57 @@
+# Docker ignore file for Flight Booking System
+
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+!DOCKER-README.md
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Maven
+target/
+!target/*.jar
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Database files (we'll use init scripts instead)
+*.sql
+*.cypher
+seed-*.sql
+seed-*.cypher
+create-*.cypher
+sync-*.cypher
+setup-*.cypher
+
+# Python scripts
+*.py
+generate-*.py
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node modules (if any)
+node_modules/
+
+# Build artifacts
+build/
+dist/

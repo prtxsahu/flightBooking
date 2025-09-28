@@ -1,0 +1,110 @@
+# Docker profile configuration for Spring Boot application
+# This configuration is used when running in Docker containers
+
+spring:
+  # Database configuration for containerized environment
+  datasource:
+    url: jdbc:postgresql://postgres:5432/bookingdb
+    username: ${SPRING_DATASOURCE_USERNAME:demo}
+    password: ${SPRING_DATASOURCE_PASSWORD:demo_pass}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1200000
+  
+  # Neo4j configuration for containerized environment
+  neo4j:
+    uri: ${SPRING_NEO4J_URI:bolt://neo4j:7687}
+    authentication:
+      username: ${SPRING_NEO4J_AUTHENTICATION_USERNAME:neo4j}
+      password: ${SPRING_NEO4J_AUTHENTICATION_PASSWORD:neo4j_pass}
+    pool:
+      max-connection-pool-size: 50
+      connection-acquisition-timeout: 30s
+      max-connection-lifetime: 30m
+      max-transaction-retry-time: 30s
+  
+  # JPA configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+  
+  # Kafka configuration for containerized environment
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:redpanda:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      retries: 3
+      batch-size: 16384
+      linger-ms: 5
+      buffer-memory: 33554432
+    consumer:
+      group-id: flight-booking-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+
+# Server configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+
+# Logging configuration
+logging:
+  level:
+    com.flightbooking: INFO
+    org.springframework.data.neo4j: WARN
+    org.springframework.kafka: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Management endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+  health:
+    db:
+      enabled: true
+    neo4j:
+      enabled: true
+    kafka:
+      enabled: true
+
+# Application specific configuration
+app:
+  flight-search:
+    max-results: 100
+    max-stops: 2
+    default-layover-min: 45
+    max-layover-hours: 24
+  booking:
+    seat-hold-timeout-minutes: 15
+    payment-timeout-minutes: 10
