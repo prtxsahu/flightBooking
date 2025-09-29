@@ -40,13 +40,13 @@ docker-compose up --build -d
 - **PostgreSQL**: localhost:5432 (demo/demo_pass/bookingdb)
 - **Redpanda Console**: http://localhost:9644
 
-## 📊 Sample Data
+## 📊 Comprehensive Dataset
 
 The system comes pre-loaded with:
-- **20 major airports** (JFK, LAX, ORD, SFO, ATL, etc.)
-- **8 sample flights** for October 1, 2025
-- **400 seats** (50 per flight)
-- **Flight relationships** in Neo4j graph
+- **100 airports worldwide** (US + International: Europe, Asia, Middle East, Africa, Americas)
+- **8,820 flights** for October 1-30, 2025
+- **441,000 seats** (50 per flight)
+- **Flight relationships** connecting airports and flights in Neo4j graph
 
 ## 🔧 Configuration
 
@@ -67,8 +67,8 @@ SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
 
 ### Database Initialization
 
-- **PostgreSQL**: Automatically initializes with schema and sample data
-- **Neo4j**: Loads airports, flights, and relationships on startup
+- **PostgreSQL**: Automatically initializes with schema and comprehensive flight data (8,820 flights + 441,000 seats)
+- **Neo4j**: Loads 100 airports, 8,820 flights, and relationships on startup
 
 ## 🧪 Testing the API
 

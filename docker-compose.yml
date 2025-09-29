@@ -76,6 +76,32 @@ services:
     networks:
       - flight-booking-network
 
+  # Neo4j Data Loader
+  neo4j-loader:
+    image: neo4j:5
+    container_name: neo4j-loader
+    environment:
+      NEO4J_AUTH: "neo4j/neo4j_pass"
+    volumes:
+      - ./init-scripts/neo4j:/scripts
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    command: >
+      bash -c "
+        echo 'Waiting for Neo4j to be ready...'
+        until cypher-shell -a bolt://neo4j:7687 -u neo4j -p neo4j_pass 'RETURN 1' > /dev/null 2>&1; do
+          echo 'Neo4j is not ready yet. Waiting...'
+          sleep 5
+        done
+        echo 'Neo4j is ready! Loading initialization data...'
+        cypher-shell -a bolt://neo4j:7687 -u neo4j -p neo4j_pass < /scripts/01-init-neo4j.cypher
+        echo 'Neo4j initialization completed successfully!'
+      "
+    networks:
+      - flight-booking-network
+    restart: "no"
+
   # Redpanda (Kafka-compatible message broker)
   redpanda:
     image: redpandadata/redpanda:latest

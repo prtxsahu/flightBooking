@@ -8,6 +8,7 @@ import com.flightbooking.search.entity.FlightInstanceNode;
 import com.flightbooking.search.entity.Itinerary;
 import com.flightbooking.search.repository.FlightInstanceNodeRepository;
 import com.flightbooking.search.repository.ItineraryRepository;
+import org.springframework.data.neo4j.core.Neo4jClient;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,7 @@ public class ItineraryService {
 
     private final FlightInstanceNodeRepository flightInstanceNodeRepository;
     private final ItineraryRepository itineraryRepository;
+    private final Neo4jClient neo4jClient;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -94,42 +96,53 @@ public class ItineraryService {
         
         List<Object[]> pathResults = new ArrayList<>();
         
+        // Convert LocalDate to OffsetDateTime for repository calls
+        OffsetDateTime departureDateTime = date.atStartOfDay().atOffset(java.time.ZoneOffset.UTC);
+        
         // Find direct flights first
-        List<FlightInstanceNode> directFlights = flightInstanceNodeRepository.findDirectFlights(source, destination);
+        List<FlightInstanceNode> directFlights = flightInstanceNodeRepository.findDirectFlights(source, destination, departureDateTime);
         for (FlightInstanceNode flight : directFlights) {
             pathResults.add(new Object[]{List.of(flight), 1});
         }
-        log.debug("Found {} direct flights", directFlights.size());
+        log.debug("Found {} direct flights for {} -> {} on {}", directFlights.size(), source, destination, date);
         
         // Find connecting flights if maxStops > 0
         if (maxStops > 0) {
-            // Convert LocalDate to OffsetDateTime for repository calls
-            OffsetDateTime departureDateTime = date.atStartOfDay().atOffset(java.time.ZoneOffset.UTC);
+
+
             
-            // Find 1-stop connections
-            List<FlightInstanceNode> firstLegs = flightInstanceNodeRepository.findConnectingFlightsFirstLeg(source, destination, departureDateTime);
-            List<FlightInstanceNode> secondLegs = flightInstanceNodeRepository.findConnectingFlightsSecondLeg(source, destination, departureDateTime);
-            
-            for (int i = 0; i < Math.min(firstLegs.size(), secondLegs.size()); i++) {
-                FlightInstanceNode flight1 = firstLegs.get(i);
-                FlightInstanceNode flight2 = secondLegs.get(i);
-                List<FlightInstanceNode> flights = List.of(flight1, flight2);
-                pathResults.add(new Object[]{flights, 2});
-            }
-            log.debug("Found {} connecting flights (1 stop)", Math.min(firstLegs.size(), secondLegs.size()));
-            
-            // Find 2-stop connections if maxStops > 1
-            if (maxStops > 1) {
-                List<Object[]> twoStopFlights = flightInstanceNodeRepository.findConnectingFlightsWithTwoStops(source, destination, departureDateTime);
-                for (Object[] result : twoStopFlights) {
-                    FlightInstanceNode flight1 = (FlightInstanceNode) result[0];
-                    FlightInstanceNode flight2 = (FlightInstanceNode) result[1];
-                    FlightInstanceNode flight3 = (FlightInstanceNode) result[2];
-                    List<FlightInstanceNode> flights = List.of(flight1, flight2, flight3);
-                    pathResults.add(new Object[]{flights, 3});
+            // Test the repository methods to see what response we get
+            log.info("Testing findConnectingFlightsFirstLegIds for {} -> {} on {}", source, destination, departureDateTime);
+            try {
+                List<Map<String, Object>> rows = flightInstanceNodeRepository.findConnectingFlightsWithOneStop(source, destination, departureDateTime);
+
+                for (Map<String,Object> row : rows) {
+                    // Convert Neo4j nodes to FlightInstanceNode objects
+                    Object flightsObj = row.get("flights");
+                    if (flightsObj instanceof List) {
+                        @SuppressWarnings("unchecked")
+                        List<Object> flightsList = (List<Object>) flightsObj;
+                        List<FlightInstanceNode> flights = new ArrayList<>();
+                        
+                        for (Object flightObj : flightsList) {
+                            if (flightObj instanceof org.neo4j.driver.types.Node) {
+                                org.neo4j.driver.types.Node node = (org.neo4j.driver.types.Node) flightObj;
+                                // Convert Neo4j node to FlightInstanceNode
+                                FlightInstanceNode flight = convertNodeToFlightInstance(node);
+                                flights.add(flight);
+                            }
+                        }
+                        
+                        if (flights.size() == 2) {
+                            pathResults.add(new Object[]{flights, 2});
+                        }
+                    }
                 }
-                log.debug("Found {} connecting flights (2 stops)", twoStopFlights.size());
+
+            } catch (Exception e) {
+                log.error("Error calling findConnectingFlights methods: {}", e.getMessage());
             }
+            
         }
         
         log.debug("Found {} total paths from Neo4j graph traversal", pathResults.size());
@@ -346,6 +359,24 @@ public class ItineraryService {
             log.info("Saved {} out of {} itineraries ({} were duplicates)", 
                     savedCount, itineraries.size(), itineraries.size() - savedCount);
         }
+    }
+
+    /**
+     * Convert Neo4j node to FlightInstanceNode object.
+     */
+    private FlightInstanceNode convertNodeToFlightInstance(org.neo4j.driver.types.Node node) {
+        return FlightInstanceNode.builder()
+                .id(node.get("id").asString())
+                .flightNo(node.get("flightNo").asString())
+                .source(node.get("source").asString())
+                .destination(node.get("destination").asString())
+                .departureTime(node.get("departureTime").asOffsetDateTime())
+                .arrivalTime(node.get("arrivalTime").asOffsetDateTime())
+                .priceMoney(node.get("priceMoney").asLong())
+                .status(node.get("status").asString())
+                .remainingSeats(node.get("remainingSeats").isNull() ? 50 : node.get("remainingSeats").asInt())
+                .heldSeats(node.get("heldSeats").isNull() ? 0 : node.get("heldSeats").asInt())
+                .build();
     }
 
     /**
