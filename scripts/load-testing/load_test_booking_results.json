@@ -1,0 +1,25 @@
+{
+  "test_config": {
+    "concurrency": 10,
+    "duration": 60,
+    "base_url": "http://localhost:8080",
+    "flight_id_range": "1-8000",
+    "seat_count_range": "1-3"
+  },
+  "results": {
+    "total_requests": 3559,
+    "actual_duration": 60.176584005355835,
+    "throughput": 59.14260602900361,
+    "response_codes": {
+      "200": 3559
+    },
+    "latency_stats": {
+      "min": 39.757728576660156,
+      "max": 1152.5771617889404,
+      "mean": 157.46079793502923,
+      "median": 129.06408309936523
+    },
+    "error_count": 0,
+    "timestamp": "2025-09-29T19:21:02.187176"
+  }
+}

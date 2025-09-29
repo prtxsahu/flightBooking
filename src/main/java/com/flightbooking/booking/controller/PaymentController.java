@@ -58,6 +58,8 @@ public class PaymentController {
                 return ResponseEntity.badRequest().body(paymentResponse);
             }
 
+        }catch(IllegalArgumentException e){
+                throw e; // this will be handled by the global exception handler
         } catch (Exception e) {
             log.error("Error processing payment request for payment ID {}: {}",
                     paymentRequest.getPaymentId(), e.getMessage(), e);

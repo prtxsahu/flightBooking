@@ -1,0 +1,24 @@
+{
+  "test_config": {
+    "base_url": "http://localhost:8080",
+    "concurrency": 10,
+    "duration": 60,
+    "airports_count": 98
+  },
+  "results": {
+    "total_requests": 8399,
+    "duration": 60.15029716491699,
+    "throughput": 139.6335578687509,
+    "response_codes": {
+      "200": 8399
+    },
+    "latency_stats": {
+      "min": 8.193016052246094,
+      "max": 2228.2941341400146,
+      "mean": 60.25408176967595,
+      "median": 41.21899604797363
+    },
+    "error_count": 0,
+    "timestamp": "2025-09-29T19:09:30.144575"
+  }
+}

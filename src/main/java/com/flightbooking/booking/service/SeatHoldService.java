@@ -27,7 +27,7 @@ public class SeatHoldService {
     private final SeatHoldRepository seatHoldRepository;
     private final OutboxEventRepository outboxEventRepository;
 
-    private static final int HOLD_DURATION_MINUTES = 1;
+    private static final int HOLD_DURATION_MINUTES = 15;
 
     /**
      * Creates seat holds for a specific flight instance.

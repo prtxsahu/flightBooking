@@ -69,7 +69,7 @@ class FlightSearchLoadTester:
     
     async def make_search_request(self, session, params):
         """Make a single search request and record metrics"""
-        url = f"{self.base_url}/v1/search/flights"
+        url = f"{self.base_url}/api/v1/search/flights"
         start_time = time.time()
         
         try:
@@ -266,7 +266,7 @@ async def main():
     """Main function"""
     # Parse command line arguments
     concurrency = 10
-    duration = 15
+    duration = 60
     
     if len(sys.argv) > 1:
         concurrency = int(sys.argv[1])

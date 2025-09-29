@@ -106,8 +106,12 @@ public class BookingService {
             // Cleanup: Delete all seat holds for this session if any flight failed
             log.error("Failed to create booking for session {}, cleaning up any existing holds", sessionId);
             seatHoldService.cancelSeatHolds(sessionId);
-            throw new RuntimeException("Failed to initiate booking: " + e.getMessage(), e);
-        }
+            return BookingResponse.failure(
+                    e.getMessage(), // Payment ID for confirmation
+                    flightIds.get(0), // Primary flight ID for backward compatibility
+                    seatCount,
+                    sessionId
+            );        }
     }
 
     /**
@@ -138,7 +142,7 @@ public class BookingService {
         } catch (Exception e) {
             log.error("Failed to process payment {}: {}", 
                     paymentId, e.getMessage());
-            throw new RuntimeException("Payment processing failed: " + e.getMessage(), e);
+            throw e;
         }
     }
 
@@ -163,7 +167,7 @@ public class BookingService {
         List<SeatHold> seatHolds = seatHoldService.findActiveHoldsBySession(sessionId);
         
         if (seatHolds.isEmpty()) {
-            throw new RuntimeException("No active seat holds found for session: Payment will be refunded to account  " + sessionId);
+            throw new IllegalArgumentException("No active seat holds found for session: Payment will be refunded to account  " + sessionId);
         }
         
         // Confirm ticket and create TicketSeat relationships

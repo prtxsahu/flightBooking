@@ -37,6 +37,9 @@ public class PaymentResponse {
 
     // Helper method to get total amount as BigDecimal
     public BigDecimal getTotalAmountAsBigDecimal() {
+        if (totalAmount == null) {
+            return BigDecimal.ZERO;
+        }
         return new BigDecimal(totalAmount).divide(new BigDecimal(100));
     }
 
